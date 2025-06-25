@@ -3,6 +3,9 @@ pipeline{
     tools{
         maven 'Maven3'
     }
+    environment {
+        IMAGE_NAME = 'arun596/java-maven:latest'
+    }
 
     stages{
         stage('clean workspace'){
@@ -24,13 +27,18 @@ pipeline{
             }
         }
         stage('build image and push to docker hub'){
-          steps{
-            withCredentials([gitUsernamePassword(credentialsId: 'dockerhub', gitToolName: 'Default')]) {
-                docker build -t arun596/java-maven:latest
-                docker push arun596/java-maven:latest
-    
+            steps{
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh """
+                            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                            docker build -t $IMAGE_NAME .
+                            docker push $IMAGE_NAME
+                        """
+                    }
+                }
+              
             }
-          }
         }
     }
 }
