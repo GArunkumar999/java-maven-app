@@ -5,7 +5,7 @@ pipeline{
     }
     environment {
         IMAGE_NAME = 'arun596/java-maven:latest'
-        CONTAINER_NAME = 'java-maven-${BUILD_NUMBER}'
+        CONTAINER_NAME = 'java-maven'
     }
 
     stages{
@@ -55,7 +55,7 @@ pipeline{
         stage('create container'){
             steps{
                 script{
-                    sh 'docker run -d --name $CONTAINER_NAME -p 9000:8080 $IMAGE_NAME'
+                    sh 'docker run -d --name $CONTAINER_NAME-$BUILD_NUMBER -p 9000:8080 $IMAGE_NAME'
                 }
             }
         }
