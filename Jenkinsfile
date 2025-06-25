@@ -27,17 +27,17 @@ pipeline{
                 }
             }
         }
-        // stage('remove container'){
-        //     steps{
-        //         script{
-        //             sh"""
-        //             docker stop $CONTAINER_NAME
-        //             docker rm $CONTAINER_NAME
-        //             """
-        //         }
-        //     }
+        stage('remove container'){
+            steps{
+                script{
+                    sh"""
+                    docker stop $CONTAINER_NAME
+                    docker rm $CONTAINER_NAME
+                    """
+                }
+            }
 
-        // }
+        }
         stage('build image and push to docker hub'){
             steps{
                 script {
