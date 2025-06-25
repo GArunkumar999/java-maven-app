@@ -31,8 +31,8 @@ pipeline{
             steps{
                 script{
                     sh"""
-                    docker stop $CONTAINER_NAME
-                    docker rm $CONTAINER_NAME
+                    docker stop $CONTAINER_NAME-$BUILD_NUMBER
+                    docker rm $CONTAINER_NAME-$BUILD_NUMBER
                     """
                 }
             }
