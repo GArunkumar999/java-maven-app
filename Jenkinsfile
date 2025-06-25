@@ -40,5 +40,12 @@ pipeline{
               
             }
         }
+        stage('create container'){
+            steps{
+                script{
+                    sh 'docker run -d --name java-maven -p 9000:8080 $IMAGE_NAME'
+                }
+            }
+        }
     }
 }
