@@ -31,8 +31,8 @@ pipeline{
             steps{
                 script{
                     sh"""
-                    docker stop $CONTAINER_NAME-$BUILD_NUMBER
-                    docker rm $CONTAINER_NAME-$BUILD_NUMBER
+                    docker stop $CONTAINER_NAME
+                    docker rm $CONTAINER_NAME
                     """
                 }
             }
@@ -55,7 +55,7 @@ pipeline{
         stage('create container'){
             steps{
                 script{
-                    sh 'docker run -d --name $CONTAINER_NAME-$BUILD_NUMBER -p 9000:8080 $IMAGE_NAME'
+                    sh 'docker run -d --name $CONTAINER_NAME -p 9000:8080 $IMAGE_NAME'
                 }
             }
         }
