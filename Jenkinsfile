@@ -24,11 +24,13 @@ pipeline{
             }
         }
         stage('build image and push to docker hub'){
+          steps{
             withCredentials([gitUsernamePassword(credentialsId: 'dockerhub', gitToolName: 'Default')]) {
                 docker build -t arun596/java-maven:latest
                 docker push arun596/java-maven:latest
     
             }
+          }
         }
     }
 }
