@@ -55,7 +55,7 @@ pipeline{
         stage('create container'){
             steps{
                 script{
-                    sh 'docker run -jk --name $CONTAINER_NAME -p 9000:8080 $IMAGE_NAME'
+                    sh 'docker run -d --name $CONTAINER_NAME -p 9000:8080 $IMAGE_NAME'
                 }
             }
         }
