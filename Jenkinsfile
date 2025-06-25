@@ -5,7 +5,7 @@ pipeline{
     }
     environment {
         IMAGE_NAME = 'arun596/java-maven:latest'
-        CONTAINER_NAME = 'Java-maven'
+        CONTAINER_NAME = 'java-maven'
     }
 
     stages{
