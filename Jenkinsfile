@@ -9,7 +9,7 @@ pipeline{
     }
 
     stages{
-        sage('clean workspace'){
+        stage('clean workspace'){
             steps{
                 cleanWs()
 
