@@ -5,6 +5,7 @@ pipeline{
     }
     environment {
         IMAGE_NAME = 'arun596/java-maven:latest'
+        CONTAINER_NAME = 'Java-maven'
     }
 
     stages{
@@ -26,6 +27,17 @@ pipeline{
                 }
             }
         }
+        stage('remove container'){
+            steps{
+                script{
+                    sh"""
+                    docker stop $CONTAINER_NAME
+                    docker rm $CONTAINER_NAME
+                    """
+                }
+            }
+
+        }
         stage('build image and push to docker hub'){
             steps{
                 script {
@@ -43,7 +55,7 @@ pipeline{
         stage('create container'){
             steps{
                 script{
-                    sh 'docker run -d --name java-maven -p 9000:8080 $IMAGE_NAME'
+                    sh 'docker run -d --name $CONTAINER_NAME -p 9000:8080 $IMAGE_NAME'
                 }
             }
         }
